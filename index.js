@@ -11,7 +11,7 @@ app.use(bodyParser.json());
 // Serve the static files from the React app
 app.use(express.static(path.join(__dirname, 'client/build')));
 
-app.use('/api', require('./api/api-index.js'));
+//app.use('/api', require('./api/api-index.js'));
 
 // An api endpoint that returns a short list of items
 
