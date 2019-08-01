@@ -8,28 +8,45 @@ class Navbar extends Component{
     }
   }
 
+  componentWillReceiveProps(nextProps) {
+    if(this.props != nextProps) {
+      this.setState({
+        username: this.props.username
+      });
+    }
+  }
+
   render(){
     return(
-      <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand" href="#">Peacemeal :)</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+      <nav className="navbar navbar-expand-lg navbar-light bg-light">
+      <a className="navbar-brand" href="#">Peacemeal :)</a>
+      {this.state.username ? (
+        <div className="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul className="navbar-nav mr-auto">
+            <li className="nav-item active">
+              <a className="nav-link" href="#">Home<span className="sr-only">(current)</span></a>
+            </li>
+            <li className="nav-item">
+              <a className="nav-link" href="#">Inventory</a>
+            </li>
+            <li className="nav-item">
+              <a className="nav-link" href="#">Recipes<span className="sr-only">(current)</span></a>
+            </li>
+          </ul>
+          <div className="btn-group dropleft">
+            <button className="button" class="btn btn-primary btn-lg" id="dropdownMenuButton" width="100%" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <span className="glyphicon glyphicon-user" aria-hidden="true"></span> {this.state.username}
+            </button>
+            <div className="dropdown-menu" aria-labelledby="dropdownMenuButton" width="100%" >
+              <a className="dropdown-item" href="#" >Manage Profile</a>
+              <a className="dropdown-item" href="#">...</a>
+              <div className="dropdown-divider"></div>
+              <a className="dropdown-item" href="#" onClick={this.props.toggleLogin}>Log Out</a>
+            </div>
+          </div>
+        </div>
+      ):(null)}
 
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="#">Home<span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Inventory</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Recipes<span class="sr-only">(current)</span></a>
-          </li>
-        </ul>
-        <button type="button" class="btn btn-primary btn-lg float-right">Logout of Peacemeal</button>
-      </div>
     </nav>
     )
   }
